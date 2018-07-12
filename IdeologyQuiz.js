@@ -23,12 +23,12 @@ questions = [
 ]
 
 // TODO: print each question object 1 by 1, followed by a set of agree/disagree answer choices
-question_no = 0
+questionNo = 0
 
 function showQuestion(){
     const output = [];
 
-    currentQuestion = questions[question_no].text
+    currentQuestion = questions[questionNo].text
     questionText = `<p>${currentQuestion}</p>`
     output.push(questionText)
     quizContainer.innerHTML = output.join('')
