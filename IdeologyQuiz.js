@@ -1,6 +1,6 @@
-const cultural = 0;
-const government = 0;
-const economic = 0;
+const cultural = 0
+const government = 0
+const economic = 0
 
 questions = [
     // example of how question object is structured
