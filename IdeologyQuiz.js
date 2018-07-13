@@ -34,15 +34,11 @@ function showQuestion(){
     questionText = `<p>${currentQuestion}</p>`
     output.push(questionText)
 
-    output.push("<label>")
-
     for (var i = 0; i < answers.length; i++) {
         output.push(`<input type="radio" value=${answers[i]} /> ${answers[i]}`)
     }
 
-    output.push("</label>")
-
-    quizContainer.innerHTML = output.join(' ')
+    document.getElementById(`answer${questionNo + 1}`).innerHTML = output.join(" ")
 }
 
 showQuestion();
