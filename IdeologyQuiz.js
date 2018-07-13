@@ -25,13 +25,24 @@ questions = [
 // TODO: print each question object 1 by 1, followed by a set of agree/disagree answer choices
 questionNo = 0
 
+answers = ["Strongly agree", "Agree", "Disagree", "Strongly disagree"]
+
 function showQuestion(){
     const output = [];
 
     currentQuestion = questions[questionNo].text
     questionText = `<p>${currentQuestion}</p>`
     output.push(questionText)
-    quizContainer.innerHTML = output.join('')
+
+    output.push("<label>")
+
+    for (var i = 0; i < answers.length; i++) {
+        output.push(`<input type="radio" value=${answers[i]} /> ${answers[i]}`)
+    }
+
+    output.push("</label>")
+
+    quizContainer.innerHTML = output.join(' ')
 }
 
 showQuestion();
