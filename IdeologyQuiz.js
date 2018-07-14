@@ -9,7 +9,7 @@ const submitButton = document.getElementById('submit');
 questions = [
     // example of how question object is structured
     {
-        text: "I prefer a strong central government",
+        text: "I prefer a strong central government.",
         category: "governemnt"
     },
     {
@@ -24,5 +24,30 @@ questions = [
 
 // TODO: print each question object 1 by 1, followed by a set of agree/disagree answer choices
 questionNo = 0
-
 answers = ["Strongly agree", "Agree", "Disagree", "Strongly disagree"]
+
+function printQuestion() {
+    output = []
+    currentQuestion = questions[questionNo]
+
+    output.push(`
+        <div>
+            ${currentQuestion.text}
+        </div>
+        <br>
+    `)
+
+    for(var i = 0; i < answers.length; i++) {
+        output.push(`
+            <div>
+                <input type="radio" name=${currentQuestion.category}${questionNo} value=${answers[i]} /> ${answers[i]}
+            </div>
+        `)
+    }
+
+    output.push(`<br>`)
+
+    quizContainer.innerHTML = output.join("")
+}
+
+printQuestion();
