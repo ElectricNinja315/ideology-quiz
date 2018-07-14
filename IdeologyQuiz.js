@@ -26,19 +26,3 @@ questions = [
 questionNo = 0
 
 answers = ["Strongly agree", "Agree", "Disagree", "Strongly disagree"]
-
-function showQuestion(){
-    const output = [];
-
-    currentQuestion = questions[questionNo].text
-    questionText = `<p>${currentQuestion}</p>`
-    output.push(questionText)
-
-    for (var i = 0; i < answers.length; i++) {
-        output.push(`<input type="radio" value=${answers[i]} /> ${answers[i]}`)
-    }
-
-    document.getElementById(`answer${questionNo + 1}`).innerHTML = output.join(" ")
-}
-
-showQuestion();
