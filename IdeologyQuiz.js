@@ -51,3 +51,15 @@ function printQuestion() {
 }
 
 printQuestion();
+
+/*
+Print a question
+when user submits, add score as necessary
+print new question
+
+
+print question
+on submit, print next question
+
+if submit but no questions left, then print results
+*/
