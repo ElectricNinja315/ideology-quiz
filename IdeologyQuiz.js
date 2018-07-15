@@ -1,19 +1,18 @@
-const cultural = 0
-const government = 0
-const economic = 0
+var cultural = 0
+var government = 0
+var economic = 0
 
 const quizContainer = document.getElementById('quiz');
-const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
 
 questions = [
     // example of how question object is structured
     {
         text: "I prefer a strong central government.",
-        category: "governemnt"
+        category: "government"
     },
     {
-        text: "I believe morality is objective rather than subjective.",
+        text: "I believe morality is subjective, rather than objective.",
         category: "cultural"
     },
     {
@@ -22,15 +21,9 @@ questions = [
     }
 ]
 
-/* DEFAULT:
-left
-authoritarian
-socialist
-*/
-
-// TODO: print each question object 1 by 1, followed by a set of agree/disagree answer choices
 questionNo = 0
-answers = ["Strongly agree", "Agree", "Disagree", "Strongly disagree"]
+answers = ["StronglyAgree", "Agree", "Disagree", "StronglyDisagree"]
+text_answers = ["Strongly agree!", "Agree.", "Disagree.", "Strongly Disagree!"]
 
 function printQuestion() {
     output = []
@@ -43,10 +36,10 @@ function printQuestion() {
         <br>
     `)
 
-    for(var i = 0; i < answers.length; i++) {
+    for (var i = 0; i < answers.length; i++) {
         output.push(`
             <div>
-                <input type="radio" name=${currentQuestion.category}${questionNo} value=${answers[i]} /> ${answers[i]}
+                <input type="radio" name=${currentQuestion.category}${questionNo} value=${answers[i]} /> ${text_answers[i]}
             </div>
         `)
     }
@@ -58,22 +51,81 @@ function printQuestion() {
 
 printQuestion();
 
-/*
-Print a question
-when user submits, add score as necessary
-print new question
-
-
-print question
-on submit, print next question
-
-if submit but no questions left, then print results
-*/
-
-function next(){
+function next() {
     // initialize
     questionCategory = questions[questionNo].category;
+    var userAnswer;
+
+    // TODO: get the value of the radio button
+    var radios = document.getElementsByName(`${questionCategory}${questionNo}`)
+
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            userAnswer = radios[i].value;
+            break;
+        }
+    }
 
     // score
-    
+    if (userAnswer == answers[0]) {
+        var questionScore = 2;
+    } else if (userAnswer == answers[1]) {
+        var questionScore = 1;
+    } else if (userAnswer == answers[2]) {
+        var questionScore = -1;
+    } else {
+        var questionScore = -2;
+    }
+
+    // adjust totals
+    if (questionCategory == "government") {
+        government = government + questionScore;
+    } else if (questionCategory == "cultural") {
+        cultural = cultural + questionScore;
+    } else {
+        economic = economic + questionScore;
+    }
+
+    if (questionNo < (questions.length - 1)) {
+        questionNo++;
+        printQuestion();
+    } else {
+        // take out submit button
+        submitButton.innerHTML = "";
+
+        console.log(cultural, government, economic)
+
+        var ideology = "";
+        if (cultural > 0) {
+            if (government > 0) {
+                if (economic > 0) {
+                    ideology = "Modern liberalism"
+                } else {
+                    ideology = "Authoritarian capitalist"
+                }
+            } else {
+                if (economic > 0) {
+                    ideology = "Anarcho-syndicalism"
+                } else {
+                    ideology = "Civil libertarianism"
+                }
+            }
+        } else {
+            if (government > 0) {
+                if (economic > 0) {
+                    ideology = "Fascism"
+                } else {
+                    ideology = "Classic conservatism"
+                }
+            } else {
+                if (economic > 0) {
+                    ideology = "Communalism"
+                } else {
+                    ideology = "Modern conservatism"
+                }
+            }
+        }
+
+        quizContainer.innerHTML = `Your ideology is: ${ideology}!`
+    }
 }
