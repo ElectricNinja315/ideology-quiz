@@ -22,6 +22,12 @@ questions = [
     }
 ]
 
+/* DEFAULT:
+left
+authoritarian
+socialist
+*/
+
 // TODO: print each question object 1 by 1, followed by a set of agree/disagree answer choices
 questionNo = 0
 answers = ["Strongly agree", "Agree", "Disagree", "Strongly disagree"]
@@ -63,3 +69,11 @@ on submit, print next question
 
 if submit but no questions left, then print results
 */
+
+function next(){
+    // initialize
+    questionCategory = questions[questionNo].category;
+
+    // score
+    
+}
